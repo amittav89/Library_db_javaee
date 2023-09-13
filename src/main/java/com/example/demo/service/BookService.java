@@ -96,7 +96,6 @@ public class BookService implements BookServiceInterface {
     // deleteBook() deletes the book with the given id
     @Override
     public void deleteBook(Long id) {
-        // Check if a book exists
         if (!bookRepository.existsById(id)) {
             throw new IllegalArgumentException("Book not found");
         }

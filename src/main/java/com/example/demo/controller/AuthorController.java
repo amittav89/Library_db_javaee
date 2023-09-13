@@ -21,23 +21,24 @@ public class AuthorController {
 
 // if successful, it will return the authors to the user
     @GetMapping
-    public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
+    public ResponseEntity<List<AuthorDTO>> getAllAuthors()
+    {
         return ResponseEntity.ok(authorService.getAuthors());
     }// Create
 // CREATE, use @Valid to validate the inputs, if the inputs are invalid, it will throw an exception to the user
 // @RequestBody is used to get the data from the user, and convert it to an AuthorDTO object, and pass it to the createAuthor() method
 // if successful, it will return the created author to the user, else it will throw an exception to the user
     @PostMapping
-    public ResponseEntity<AuthorDTO> createAuthor(@RequestBody @Valid AuthorDTO authorDTO) throws Exception {
-// write here your code
-        return null;
+    public ResponseEntity<AuthorDTO> createAuthor(@RequestBody @Valid AuthorDTO authorDTO) throws Exception
+    {
+        return ResponseEntity.ok(authorService.createAuthor(authorDTO));
     }
-// Read
 
     @GetMapping("/{id}")
 // READ ONE, returns the author with the given id to the user,
 // if the author does not exist, it will throw an exception to the user
-    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<AuthorDTO> getAuthorById(@PathVariable Long id) throws Exception
+    {
 // example code:
 // ResponseEntity.ok() returns the status code 200 to the user, and the author with the given id
 // it is streamed to the user as JSON
@@ -51,9 +52,10 @@ public class AuthorController {
     @PutMapping("/{id}")
     public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable Long id, @RequestBody @Valid AuthorDTO authorDTO) throws Exception
     {
-// write here your code
-        return null;
-    }// Delete
+
+        return ResponseEntity.ok(authorService.updateAuthor(id, authorDTO ));
+    }
+
 // DELETE, deletes the author with the given id,
 // ResponseEntity<Void> is used to return a message to the user,
 // if successful, it will return the message "deleted!",

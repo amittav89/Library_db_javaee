@@ -4,52 +4,61 @@ package com.example.demo.controller;
 import com.example.demo.dto.BookDTO;
 import com.example.demo.service.BookService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
 public class BookController
 {
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
     @PostMapping
     public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) throws Exception {
         BookDTO savedBookDTO = bookService.createBook(bookDTO);
         return new ResponseEntity<>(savedBookDTO, HttpStatus.CREATED);
     }
 
-    // Read All
     @GetMapping
-    public ResponseEntity<List<BookDTO>> getAllBooks() {
-// write here your code
-        return null;
+    public ResponseEntity<List<BookDTO>> getAllBooks()
+    {
+        return ResponseEntity.ok(bookService.getBooks());
     }
 
-    // Read
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
-// write here your code
-        return null;
+    public ResponseEntity<Optional<BookDTO>> getBookById(@PathVariable Long id)
+    {
+        return ResponseEntity.ok(bookService.getBookById(id));
     }
+
     // Update
 
     @PutMapping("/{id}")
     public ResponseEntity<BookDTO> updateBook(@PathVariable Long id, @RequestBody @Valid BookDTO bookDTO) throws Exception
     {
-// write here your code
-        return null;
+        return ResponseEntity.ok(bookService.updateBook(id, bookDTO));
     }
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) throws Exception {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
 // write here your code
-        return null;
+        try {
+            bookService.deleteBook(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
 }
