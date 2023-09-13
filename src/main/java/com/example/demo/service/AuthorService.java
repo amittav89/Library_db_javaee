@@ -55,15 +55,31 @@ public class AuthorService implements AuthorServiceInterface {
     }
     // createAuthor() creates a new author with the given authorDTO
     @Override
-    public AuthorDTO createAuthor(AuthorDTO authorDTO) {
-// write code here
+    public AuthorDTO createAuthor(AuthorDTO authorDTO) throws Exception
+    {
+        Author author=mapDTOAuthorToAuthor(authorDTO);
+        //check author exists
+        if(author.getId()!=null)
+        {
+            throw new Exception("author already exists");
+        }
+      //if author does not exist
+      authorRepository.save(author);
         return authorDTO;
     }
     // getAuthors() returns a list of all authors
     @Override
-    public List<AuthorDTO> getAuthors() {
-// write code here
-        return null;
+    public List<AuthorDTO> getAuthors()
+    {
+        List<Author> authors = authorRepository.findAll();
+        List<AuthorDTO> authorsDTO = new ArrayList<>();
+        for(Author author: authors)
+        {
+            AuthorDTO authorDTO = mapAuthorToDTOAuthor(author);
+            authorsDTO.add(authorDTO);
+        }
+
+        return authorsDTO;
     }
     // returns the author with the given id
     @Override
