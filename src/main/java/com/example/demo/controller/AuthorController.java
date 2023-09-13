@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Entity.AuthorDTO;
+import com.example.demo.dto.AuthorDTO;
 import com.example.demo.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ public class AuthorController {
     @GetMapping
     public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAuthors());
-    }
-    // Create
+    }// Create
 // CREATE, use @Valid to validate the inputs, if the inputs are invalid, it will throw an exception to the user
 // @RequestBody is used to get the data from the user, and convert it to an AuthorDTO object, and pass it to the createAuthor() method
 // if successful, it will return the created author to the user, else it will throw an exception to the user
     @PostMapping
     public ResponseEntity<AuthorDTO> createAuthor(@RequestBody @Valid AuthorDTO authorDTO) throws Exception {
 // write here your code
+        return null;
     }
 // Read
 
@@ -52,8 +52,7 @@ public class AuthorController {
     {
 // write here your code
         return null;
-    }
-// Delete
+    }// Delete
 // DELETE, deletes the author with the given id,
 // ResponseEntity<Void> is used to return a message to the user,
 // if successful, it will return the message "deleted!",

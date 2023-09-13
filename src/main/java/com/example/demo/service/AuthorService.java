@@ -1,16 +1,16 @@
 package com.example.demo.service;
 
 
-import com.example.demo.Entity.AuthorDTO;
-import com.example.demo.Entity.BookDTO;
+import com.example.demo.dto.AuthorDTO;
+import com.example.demo.dto.BookDTO;
 import com.example.demo.entity.Author;
+import com.example.demo.entity.Book;
 import com.example.demo.repository.AuthorRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService implements AuthorServiceInterface {
@@ -34,7 +34,7 @@ public class AuthorService implements AuthorServiceInterface {
                 for (Book book : author.getBooks()) {
                     BookDTO bookDTO = new BookDTO();
                     bookDTO.setId(book.getId());
-                    bookDTO.setTitle(book.getId());
+                    bookDTO.setTitle(book.getTitle());
                     bookDTO.setAuthorId(book.getAuthor().getId());
                     authorDTO.getBookDTOS().add(bookDTO);
                 }
@@ -57,6 +57,7 @@ public class AuthorService implements AuthorServiceInterface {
     @Override
     public AuthorDTO createAuthor(AuthorDTO authorDTO) {
 // write code here
+        return authorDTO;
     }
     // getAuthors() returns a list of all authors
     @Override

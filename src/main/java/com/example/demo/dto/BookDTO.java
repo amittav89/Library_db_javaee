@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.example.demo.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;

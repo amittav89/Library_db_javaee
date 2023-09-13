@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.example.demo.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
@@ -33,6 +33,6 @@ public class AuthorDTO
     // persistence annotations
     @Column(unique = true, nullable = false, length = 70)
     private String email;
-    private List<com.example.demo.Entity.BookDTO> bookDTOS;
+    private List<BookDTO> bookDTOS;
 
 }

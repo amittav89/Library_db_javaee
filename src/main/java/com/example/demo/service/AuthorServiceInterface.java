@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.Entity.AuthorDTO;
+import com.example.demo.dto.AuthorDTO;
 
 import java.util.List;
 

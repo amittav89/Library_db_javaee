@@ -1,7 +1,8 @@
-package com.example.demo.DTO;
+package com.example.demo.controller;
 
 
-import com.example.demo.Entity.BookDTO;
+import com.example.demo.dto.BookDTO;
+import com.example.demo.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,24 +19,18 @@ public class BookController
     @Autowired
     private BookService bookService;
     @PostMapping
-    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) {
+    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) throws Exception {
         BookDTO savedBookDTO = bookService.createBook(bookDTO);
         return new ResponseEntity<>(savedBookDTO, HttpStatus.CREATED);
     }
 
-    @Autowired
-    private BookService bookService;
     // Read All
     @GetMapping
     public ResponseEntity<List<BookDTO>> getAllBooks() {
 // write here your code
         return null;
     }
-    // Create
-    @PostMapping
-    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) throws Exception {
-        // write here your code
-    }
+
     // Read
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
